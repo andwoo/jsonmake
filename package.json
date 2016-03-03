@@ -1,0 +1,14 @@
+{
+  "name": "jsonmake",
+  "version": "1.0.0",
+  "description": "Create or populate objects from JSON data.",
+  "main": "./src/jsonmake.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "author": "Andrew Manley",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
+}
