@@ -4,8 +4,9 @@ var assert = require("assert");
 /* TEST JSON */
 var overwrite = "overwrite";
 var original = "original";
-var overwriteAllJson = `{"p1":"${overwrite}","p2":"${overwrite}", "p3":"${overwrite}", "p4":"${overwrite}"}`;
-var overwriteNoneJson = `{"a":"${overwrite}","b":"${overwrite}", "c":"${overwrite}", "d":"${overwrite}"}`;
+var overwriteAllJson = `{"p1":"${overwrite}","p2":"${overwrite}","p3":"${overwrite}","p4":"${overwrite}"}`;
+var limitedJson = `{"p1":"${overwrite}","p2":"${overwrite}"}`;
+var overwriteNoneJson = `{"a":"${overwrite}","b":"${overwrite}","c":"${overwrite}","d":"${overwrite}"}`;
 
 /* TEST OBJECTS */
 class TestClassNoBlueprint {
@@ -89,5 +90,25 @@ describe("[MAKE] ES6 Class", function() {
       assert.strictEqual(cls.c, undefined);
       assert.strictEqual(cls.d, undefined);
     });
+  });
+});
+
+describe("[DUMP] ES6 Class", function() {
+  it("No blueprint", function() {
+    let cls = new TestClassNoBlueprint();
+    cls.p1 = overwrite;
+    cls.p2 = overwrite;
+    cls.p3 = overwrite;
+    cls.p4 = overwrite;
+    assert.strictEqual(JSONMake.dump(cls), overwriteAllJson);
+  });
+  
+  it("Using blueprint", function() {
+    let cls = new TestClassBlueprint();
+    cls.p1 = overwrite;
+    cls.p2 = overwrite;
+    delete cls.p3;
+    delete cls.p3;
+    assert.strictEqual(JSONMake.dump(cls), limitedJson);
   });
 });
