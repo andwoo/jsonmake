@@ -7,28 +7,24 @@ var original = "original";
 var overwriteAllJson = `{"p1":"${overwrite}","p2":"${overwrite}", "p3":"${overwrite}", "p4":"${overwrite}"}`;
 var overwriteNoneJson = `{"a":"${overwrite}","b":"${overwrite}", "c":"${overwrite}", "d":"${overwrite}"}`;
 
-/* TEST OBJECTS */
-class TestClassNoBlueprint {
-  constructor() {
-    this.p1 = original;
-    this.p2 = original;
-    this.p3 = original;
-    this.p4 = original;
-  }
+function TestClassFunctionNoBluePrint() {
+  this.p1 = original;
+  this.p2 = original;
+  this.p3 = original;
+  this.p4 = original;
 }
 
-class TestClassBlueprint extends TestClassNoBlueprint {
-  writePrint() { return ["p1", "p2"]; }
-  readPrint()  { return ["p1", "p2"]; }
-}
+function TestClassFunctionBluePrint() { TestClassFunctionNoBluePrint.apply(this); }
+TestClassFunctionBluePrint.prototype.writePrint = function() { return ["p1", "p2"]; }
+TestClassFunctionBluePrint.prototype.readPrint = function() { return ["p1", "p2"]; }
 
 //test make
   //test make using no blueprint (both generate and reference)
   //test make using blueprint
-describe("[MAKE] ES6 Class", function() {
+describe("[MAKE] Function Class", function() {
   describe("Pass by reference", function() {
     it("Overwrite all", function() {
-      let cls = new TestClassNoBlueprint();
+      let cls = new TestClassFunctionNoBluePrint();
       JSONMake.make(cls, overwriteAllJson);
       assert.strictEqual(cls.p1, overwrite);
       assert.strictEqual(cls.p2, overwrite);
@@ -37,7 +33,7 @@ describe("[MAKE] ES6 Class", function() {
     });
     
     it("Overwrite using blueprint", function() {
-      let cls = new TestClassBlueprint();
+      let cls = new TestClassFunctionBluePrint();
       JSONMake.make(cls, overwriteAllJson);
       assert.strictEqual(cls.p1, overwrite);
       assert.strictEqual(cls.p2, overwrite);
@@ -46,7 +42,7 @@ describe("[MAKE] ES6 Class", function() {
     });
     
     it("Overwrite none", function() {
-      let cls = new TestClassNoBlueprint();
+      let cls = new TestClassFunctionNoBluePrint();
       JSONMake.make(cls, overwriteNoneJson);
       assert.strictEqual(cls.p1, original);
       assert.strictEqual(cls.p2, original);
@@ -60,9 +56,9 @@ describe("[MAKE] ES6 Class", function() {
     });
   });
   
-  describe("Generated ES6 class", function() {
+  describe("Generated Function class", function() {
     it("Overwrite all", function() {
-      let cls = JSONMake.make(TestClassNoBlueprint, overwriteAllJson);
+      let cls = JSONMake.make(TestClassFunctionNoBluePrint, overwriteAllJson);
       assert.strictEqual(cls.p1, overwrite);
       assert.strictEqual(cls.p2, overwrite);
       assert.strictEqual(cls.p3, overwrite);
@@ -70,7 +66,7 @@ describe("[MAKE] ES6 Class", function() {
     });
     
     it("Overwrite using blueprint", function() {
-      let cls = JSONMake.make(TestClassBlueprint, overwriteAllJson);
+      let cls = JSONMake.make(TestClassFunctionBluePrint, overwriteAllJson);
       assert.strictEqual(cls.p1, overwrite);
       assert.strictEqual(cls.p2, overwrite);
       assert.strictEqual(cls.p3, original);
@@ -78,7 +74,7 @@ describe("[MAKE] ES6 Class", function() {
     });
     
     it("Overwrite none", function() {
-      let cls = JSONMake.make(TestClassNoBlueprint, overwriteNoneJson);
+      let cls = JSONMake.make(TestClassFunctionNoBluePrint, overwriteNoneJson);
       assert.strictEqual(cls.p1, original);
       assert.strictEqual(cls.p2, original);
       assert.strictEqual(cls.p3, original);
