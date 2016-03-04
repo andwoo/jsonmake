@@ -17,8 +17,8 @@ var ObjectClassNoBlueprint = {
 };
 
 var ObjectClassBlueprint = Object.create(ObjectClassNoBlueprint);
-ObjectClassBlueprint.writePrint = function() { return ["p1", "p2"]; }
-ObjectClassBlueprint.readPrint = function() { return ["p1", "p2"]; }
+ObjectClassBlueprint.writeJSON = function() { return ["p1", "p2"]; }
+ObjectClassBlueprint.readJSON = function() { return ["p1", "p2"]; }
 
 //test make
   //test make using no blueprint (both generate and reference)

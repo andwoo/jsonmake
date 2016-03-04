@@ -5,8 +5,8 @@ JSONMake.prototype.config = function(config) {
   //override config
   var temp = JSONMake.prototype.isUndefined(config) ? {} : config;
   this.config = {
-    readPrint: temp.readPrint || "readPrint",
-    writePrint: temp.writePrint || "writePrint"
+    readJSON: temp.readJSON || "readJSON",
+    writeJSON: temp.writeJSON || "writeJSON"
   }
 };
 
@@ -40,8 +40,8 @@ JSONMake.prototype.make = function(obj, source) {
     return makeObj;
   }
   
-  if(this.config.readPrint in makeObj && JSONMake.prototype.isFunction(makeObj[this.config.readPrint])) {
-    var blueprint = makeObj[this.config.readPrint]();
+  if(this.config.readJSON in makeObj && JSONMake.prototype.isFunction(makeObj[this.config.readJSON])) {
+    var blueprint = makeObj[this.config.readJSON]();
     if(JSONMake.prototype.isArray(blueprint)) {
       for(var key of blueprint) {
         if(key in parsed) {
@@ -66,9 +66,9 @@ JSONMake.prototype.dump = function(obj) {
     console.warn(`Dump warning: object is undefined`);
     return "{}"; //empty json object
   }
-  else if(this.config.writePrint in obj && JSONMake.prototype.isFunction(obj[this.config.writePrint])) {
+  else if(this.config.writeJSON in obj && JSONMake.prototype.isFunction(obj[this.config.writeJSON])) {
     //use the blueprint
-    var blueprint = obj[this.config.writePrint]();
+    var blueprint = obj[this.config.writeJSON]();
     if(JSONMake.prototype.isArray(blueprint)) {
       var tempObj = {};
       for(var key of blueprint) {

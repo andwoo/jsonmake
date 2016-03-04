@@ -16,8 +16,8 @@ function TestClassFunctionNoBluePrint() {
 }
 
 function TestClassFunctionBluePrint() { TestClassFunctionNoBluePrint.apply(this); }
-TestClassFunctionBluePrint.prototype.writePrint = function() { return ["p1", "p2"]; }
-TestClassFunctionBluePrint.prototype.readPrint = function() { return ["p1", "p2"]; }
+TestClassFunctionBluePrint.prototype.writeJSON = function() { return ["p1", "p2"]; }
+TestClassFunctionBluePrint.prototype.readJSON = function() { return ["p1", "p2"]; }
 
 //test make
   //test make using no blueprint (both generate and reference)

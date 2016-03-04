@@ -19,8 +19,8 @@ class TestClassNoBlueprint {
 }
 
 class TestClassBlueprint extends TestClassNoBlueprint {
-  writePrint() { return ["p1", "p2"]; }
-  readPrint()  { return ["p1", "p2"]; }
+  writeJSON() { return ["p1", "p2"]; }
+  readJSON()  { return ["p1", "p2"]; }
 }
 
 //test make
