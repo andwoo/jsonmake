@@ -1,8 +1,8 @@
 {
   "name": "jsonmake",
   "version": "1.0.0",
-  "description": "Create or populate objects from JSON data.",
-  "main": "./src/jsonmake.js",
+  "description": "A JSON library for serializing and deserializing specific properties of objects.",
+  "main": "jsonmake.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec"
   },

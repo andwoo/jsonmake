@@ -1,4 +1,4 @@
-var JSONMake = require("../src/jsonmake");
+var JSONMake = require("../jsonmake");
 var assert = require("assert");
 
 /* TEST JSON */
