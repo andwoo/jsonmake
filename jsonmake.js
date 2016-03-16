@@ -4,14 +4,14 @@
  * @param {Object} cfg - Config object containing keys for overriding the method names for 'readJSON' and 'writeJSON'.
  */
 function JSONMake(cfg) {
-  JSONMake.prototype.config(cfg);
+  this.config(cfg);
 }
 /**
  * Overwrites the default config object.
  * @param {Object} cfg - Config object containing keys for overriding the method names for 'readJSON' and 'writeJSON'. 
  */
 JSONMake.prototype.config = function(config) {
-  var temp = JSONMake.prototype.isUndefined(config) ? {} : config;
+  var temp = this.isUndefined(config) ? {} : config;
   this.config = {
     readJSON: temp.readJSON || "readJSON",
     writeJSON: temp.writeJSON || "writeJSON"
@@ -27,11 +27,11 @@ JSONMake.prototype.config = function(config) {
 JSONMake.prototype.make = function(obj, source) {
   //generates a class from json
   var makeObj;
-  if (JSONMake.prototype.isFunction(obj)) {
+  if (this.isFunction(obj)) {
     //perform new
     makeObj = new obj();
   }
-  else if(JSONMake.prototype.isObject(obj) && !JSONMake.prototype.isUndefined(obj)) {
+  else if(this.isObject(obj) && !this.isUndefined(obj)) {
     //object is already created
     makeObj = obj;
   }
@@ -40,23 +40,23 @@ JSONMake.prototype.make = function(obj, source) {
     return obj;
   }
   
-  if(JSONMake.prototype.isUndefined(source) || source === "" ) {
+  if(this.isUndefined(source) || source === "" ) {
     console.warn("Make warning: JSON source " + source + " is undefined or invalid");
     return makeObj;
   }
   //check if jsonstring is a string or already parsed json
   var parsed;
   try {
-    parsed = JSONMake.prototype.isString(source) ? JSON.parse(source) : source;
+    parsed = this.isString(source) ? JSON.parse(source) : source;
   }
   catch(error) {
     console.warn("Make warning: JSON source " + source + " is undefined or invalid");
     return makeObj;
   }
   
-  if(this.config.readJSON in makeObj && JSONMake.prototype.isFunction(makeObj[this.config.readJSON])) {
+  if(this.config.readJSON in makeObj && this.isFunction(makeObj[this.config.readJSON])) {
     var blueprint = makeObj[this.config.readJSON]();
-    if(JSONMake.prototype.isArray(blueprint)) {
+    if(this.isArray(blueprint)) {
       for(var key of blueprint) {
         if(key in parsed) {
           makeObj[key] = parsed[key];  
@@ -66,7 +66,7 @@ JSONMake.prototype.make = function(obj, source) {
     }
   }
   
-  var keys = JSONMake.prototype.getObjectKeys(parsed);
+  var keys = this.getObjectKeys(parsed);
   for(var key of keys) {
     if(key in makeObj) {
       makeObj[key] = parsed[key];
@@ -81,14 +81,14 @@ JSONMake.prototype.make = function(obj, source) {
  * @return {string} Stringified JSON object.
  */
 JSONMake.prototype.dump = function(obj) {
-  if (JSONMake.prototype.isUndefined(obj)) {
+  if (this.isUndefined(obj)) {
     console.warn("Dump warning: object is undefined");
     return "{}"; //empty json object
   }
-  else if(this.config.writeJSON in obj && JSONMake.prototype.isFunction(obj[this.config.writeJSON])) {
+  else if(this.config.writeJSON in obj && this.isFunction(obj[this.config.writeJSON])) {
     //use the blueprint
     var blueprint = obj[this.config.writeJSON]();
-    if(JSONMake.prototype.isArray(blueprint)) {
+    if(this.isArray(blueprint)) {
       var tempObj = {};
       for(var key of blueprint) {
         tempObj[key] = obj[key];
@@ -124,7 +124,7 @@ JSONMake.prototype.isFunction = function(thing) {
  * @return {bool} Returns TRUE if the parameter is of type Object.
  */
 JSONMake.prototype.isObject = function(thing) {
-  return !JSONMake.prototype.isUndefined(thing) && typeof(thing) === "object" && !JSONMake.prototype.isArray(thing);
+  return !this.isUndefined(thing) && typeof(thing) === "object" && !this.isArray(thing);
 }
 /**
  * Method checks if the passed in parameter is of type array. 
@@ -162,8 +162,8 @@ JSONMake.prototype.getObjectKeys = function(obj) {
 };
 
 //export the library
-if(!JSONMake.prototype.isUndefined(exports) && !JSONMake.prototype.isUndefined(module) && module.exports) {
-//export the code for node
+if(typeof(exports) !== "undefined" && typeof(module) !== "undefined" && module.exports) {
+  //export the code for node
   module.exports = new JSONMake({});
 }
 //browser

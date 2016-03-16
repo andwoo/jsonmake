@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>JSONMake Browser Test</title>
+    <link rel="stylesheet" href="./mocha.css">
+  </head>
+  <body>
+    <div id="mocha"><p><a href=".">Index</a></p></div>
+    <div id="messages"></div>
+    <div id="fixtures"></div>
+    
+    <script src="./mocha.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <!-- tests -->
+    <script src="./assertSetup.js"></script>
+    <script src="../jsonmake.js"></script>
+    <script src="../test/es6class.js"></script>
+    <script src="../test/functionClass.js"></script>
+    <script src="../test/objectClass.js"></script>
+    <script src="../test/helpers.js"></script>
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>

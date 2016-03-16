@@ -1,5 +1,11 @@
-var JSONMake = require("../jsonmake");
-var assert = require("assert");
+try {
+  var JSONMake = require("../jsonmake");
+  var assert = require("assert");
+}
+catch(error) {
+  
+}
+
 
 /* TEST JSON */
 var overwrite = "overwrite";
