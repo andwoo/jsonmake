@@ -1,6 +1,6 @@
 {
   "name": "jsonmake",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A JSON library for serializing and deserializing specific properties of objects.",
   "main": "jsonmake.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "dump",
     "minify",
     "stringify"
-    ],
+  ],
   "devDependencies": {
     "mocha": "^2.4.5"
   }
