@@ -11,6 +11,15 @@
   },
   "author": "Andrew Manley",
   "license": "ISC",
+  "keywords": [
+    "json",
+    "make",
+    "serialize",
+    "deserialize",
+    "dump",
+    "minify",
+    "stringify"
+    ],
   "devDependencies": {
     "mocha": "^2.4.5"
   }
